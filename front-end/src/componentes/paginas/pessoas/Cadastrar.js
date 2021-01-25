@@ -8,8 +8,9 @@ function Cadastrar() {
 
         document.querySelector(id).addEventListener('submit', (evento) => {
             evento.preventDefault()
-    
-            let messageField = document.querySelector("#form-content").value;
+            
+            let msgTextArea = document.querySelector("#form-content");
+            let messageField = msgTextArea.value;
             let messageError = '';
             
             let dadosFormulario = new FormData();
@@ -25,6 +26,13 @@ function Cadastrar() {
                 if (resposta.status == 200){
                     document.querySelector("#Cadastrar-Feedback").innerHTML = "<div class='alert alert-success mt-2 ml-4 mr-4'>Mensagem enviada com sucesso !</div>"
                     document.querySelector("#Cadastrar-Feedback").style.display = 'block';
+
+                    msgTextArea.value = ""
+
+                    setTimeout(() => {
+                        document.querySelector("#Cadastrar-Feedback").style.display = 'none';
+                    }, 2000);
+
                     return
                 }
             }).catch((erro) => {
